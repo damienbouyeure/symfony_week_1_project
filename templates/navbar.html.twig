@@ -2,7 +2,8 @@
 <ul id="dropdown" class="dropdown-content">
     <li><a href="{{ path('profile') }}">Mon Compte</a></li>
     {% if is_granted('ROLE_ADMIN') %}
-        <li><a href="{{ path('user_video') }}">Admin</a></li>
+        <li><a href="{{ path('admin') }}">Admin</a>
+        <li><a href="{{ path('category') }}">Categories</a></li>
     {% endif %}
     <li><a href="{{ path('user_video') }}">Video</a></li>
     <li class="divider"></li>

@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    <table>
+        <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Email</th>
+            <th>Birthday</th>
+            <th>Action</th>
+
+        </tr>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.firstname }}</td>
+                <td>{{ user.lastname }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.birthday|date }}</td>
+                <td><a href="{{ path('user_remove', { 'id': user.id }) }} ">Delete</a></td>
+
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

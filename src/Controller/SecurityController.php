@@ -9,6 +9,8 @@ use App\Form\ProfileUserType;
 use App\Form\RegisterUserType;
 use App\Form\VideoType;
 use App\Manager\VideoManager;
+use App\Repository\CategoryRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -59,12 +61,14 @@ class SecurityController extends AbstractController
         }
         return $this->render('security/profile.html.twig', ['form' => $form->createView(), 'user' => $user]);
     }
+
     /** * @Route("/user/video", name="user_video") */
     public function userVideo(Request $request, EntityManagerInterface $entityManager)
     {
         $user = $this->getUser();
-        return $this->render('security/video.html.twig', [ 'user' => $user]);
+        return $this->render('security/video.html.twig', ['user' => $user]);
     }
+
     /** * @Route("/user/video/create", name="user_createvideo") */
     public function userCreateVideo(Request $request, EntityManagerInterface $entityManager)
     {
@@ -79,8 +83,9 @@ class SecurityController extends AbstractController
             $entityManager->flush();
             return $this->redirectToRoute('user_video');
         }
-        return $this->render('security/createVideo.html.twig', ['form' => $form->createView(),'user' => $user]);
+        return $this->render('security/createVideo.html.twig', ['form' => $form->createView(), 'user' => $user]);
     }
+
     /** * @Route("/user/video/edit/{id}", name="user_editvideo") */
     public function userEditVideo(Request $request, EntityManagerInterface $entityManager, int $id, VideoManager $videoManager)
     {
@@ -94,15 +99,51 @@ class SecurityController extends AbstractController
             $entityManager->flush();
             return $this->redirectToRoute('user_video');
         }
-        return $this->render('security/editVideo.html.twig', ['form' => $form->createView(),'user' => $user]);
+        return $this->render('security/editVideo.html.twig', ['form' => $form->createView(), 'user' => $user]);
     }
-    /** * @Route("/user/video/remove/{id}", name="video_remove")  */
-    public function remove(int $id, VideoManager $videoManager, EntityManagerInterface $entityManager)
+
+    /** * @Route("/user/video/remove/{id}", name="video_remove") */
+    public function removeVideo(int $id, VideoManager $videoManager, EntityManagerInterface $entityManager)
     {
         $video = $videoManager->findById($id);
         $entityManager->remove($video);
         $entityManager->flush();
         return $this->redirectToRoute('user_video');
+    }
+
+    /**
+     * @Route("/admin", name="admin")
+     */
+    public function admin(UserRepository $userRepository)
+    {
+        $users = $userRepository->findAll();
+        return $this->render('security/admin.html.twig', [
+
+            'users' => $users
+        ]);
+    }
+
+    /**
+     * @Route("/admin/remove/{id}", name="user_remove")
+     */
+    public function removeUser(UserRepository $userRepository, int $id, EntityManagerInterface $entityManager)
+    {
+        $user = $userRepository->findOneBy(['id' => $id]);
+        $entityManager->remove($user);
+        $entityManager->flush();
+        return $this->redirectToRoute('admin');
+    }
+    /**
+     * @Route("/admin/category", name="category")
+     */
+    public function categogy(CategoryRepository $categoryRepository)
+    {
+       $category = $categoryRepository->findAll();
+
+        return $this->render('security/category.html.twig', [
+
+            'category' => $category
+        ]);
     }
 
 }
