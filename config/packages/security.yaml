@@ -1,0 +1,35 @@
+security:
+  # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+  encoders:
+    App\Entity\User: bcrypt
+  providers:
+    our_db_provider:
+      entity:
+        class: App\Entity\User
+        property: email
+    in_memory: { memory: ~ }
+  firewalls:
+    dev:
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
+    main:
+      anonymous: ~
+      provider: our_db_provider
+      form_login:
+        login_path: login
+        check_path: login
+        username_parameter: "login_user[email]"
+        password_parameter: "login_user[password]"
+      logout:
+        path:   /logout
+        target: /
+
+
+
+
+
+  # Note: Only the *first* access control that matches will be used
+  access_control:
+    - { path: ^/admin, roles: ROLE_ADMIN }
+    - { path: ^/profile, roles: ROLE_USER }
+    - { path: ^/user, roles: ROLE_USER }

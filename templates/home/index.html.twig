@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            {% for videos in video %}
+            <div class="col s3">
+                <div class="card ">
+                    <div class="card-content ">
+                        <span class="card-title">  {{ videos.title }}</span>
+                        <p>  {{ videos.description }}</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="{{ path('video_id', {'id': videos.id} ) }}">Voir la video</a>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        {% endfor %}
+    </div>
+    </div>
+{% endblock %}

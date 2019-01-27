@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m8 offset-m2">
+                <div class="card">
+                    <div class="card-image">
+                        <div class="video-container">
+                            <iframe width="853" height="480" src="{{ video.url }}" frameborder="0"
+                                    allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="row">
+                            <div class="col s6">
+                                {{ video.title }}
+                            </div>
+                            <div class="col s6 right-align">
+                                {% for category in video.categories %}
+                                    {{ category.title }}&nbsp;
+                                {% endfor %}
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                {{ video.description }}
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        {{ video.createdAt|date }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+

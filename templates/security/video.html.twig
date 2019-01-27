@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Categories</th>
+            <th>Url</th>
+            <th>Date de création</th>
+            <th>Action</th>
+
+        </tr>
+        {% for video in user.videos %}
+            <tr>
+                <td>{{ video.title }}</td>
+                <td>{% for category in video.categories %}
+                        {{ category.title }}
+                    {% endfor %}
+                </td>
+                <td>{{ video.url }}</td>
+                <td>{{ video.createdAt|date }}</td>
+                <td>
+                    <a class="btn-floating waves-effect waves-light btn-large green" href="{{ path('video_id', {'id': video.id} ) }}"><i class="material-icons left">visibility</i></a>
+                    <a class="btn-floating waves-effect waves-light btn-large blue" href="{{ path('user_editvideo', {'id': video.id} ) }}"><i class="material-icons left">edit</i></a>
+                    <a class="btn-floating waves-effect waves-light btn-large red" href="{{ path('video_remove', {'id': video.id} ) }}"><i class="material-icons left">remove</i></a>
+                </td>
+
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+

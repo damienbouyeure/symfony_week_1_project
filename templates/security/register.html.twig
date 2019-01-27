@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+{% block title %}Inscription {% endblock %}
+{% block body %}
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m8 offset-m2">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="{{ asset('/img/subscribeImg.jpg') }}">
+                        <span class="card-title title-dark">Inscription</span>
+                    </div>
+                    <div class="card-content">
+                        {{ form_start(form) }}
+                        {{ form_errors(form) }}
+                        <div>
+                            {{ form_label(form.email) }}
+                            {{ form_errors(form.email) }}
+                            {{ form_widget(form.email) }}
+                            {{ form_help(form.email) }}
+                        </div>
+                        <div>
+                            {{ form_label(form.password.first) }}
+                            {{ form_errors(form.password.first) }}
+                            {{ form_widget(form.password.first) }}
+                            {{ form_help(form.password.first) }}
+                        </div>
+                        <div>
+                            {{ form_label(form.password.second) }}
+                            {{ form_errors(form.password.second) }}
+                            {{ form_widget(form.password.second) }}
+                            {{ form_help(form.password.second) }}
+                        </div>
+                        <div>
+                            {{ form_label(form.firstname, "Prénom") }}
+                            {{ form_errors(form.firstname) }}
+                            {{ form_widget(form.firstname) }}
+                            {{ form_help(form.firstname) }}
+                        </div>
+                        <div>
+                            {{ form_label(form.lastname, 'Nom') }}
+                            {{ form_errors(form.lastname) }}
+                            {{ form_widget(form.lastname) }}
+                            {{ form_help(form.lastname) }}
+                        </div>
+
+                        <div>
+                            {{ form_label(form.birthday, 'Date de Naissance') }}
+                            {{ form_errors(form.birthday) }}
+                            {{ form_widget(form.birthday, {'attr': {'class': 'datepicker'}}) }}
+                            {{ form_help(form.birthday) }}
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        <div>
+                            {{ form_label(form.submit) }}
+                            {{ form_widget(form.submit) }}
+
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+

@@ -1,0 +1,10 @@
+.title-dark {
+    color: black !important;
+    font-weight: 600 !important;
+    text-shadow: 1px 1px 0px #ffffff, -1px -1px 0px #ffffff, -1px 1px 0px #ffffff, 1px -1px 0px #ffffff;
+}
+
+[type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+    opacity: 100;
+    position: relative;
+}

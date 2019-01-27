@@ -1,0 +1,26 @@
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+<ul id="dropdown" class="dropdown-content">
+    <li><a href="{{ path('profile') }}">Mon Compte</a></li>
+    {% if is_granted('ROLE_ADMIN') %}
+        <li><a href="{{ path('user_video') }}">Admin</a></li>
+    {% endif %}
+    <li><a href="{{ path('user_video') }}">Video</a></li>
+    <li class="divider"></li>
+    <li><a href="{{ path('user_createvideo') }}">ajouter une video</a></li>
+    <li><a href="{{ path('logout') }}">logout</a></li>
+</ul>
+{% endif %}
+<nav>
+    <div class="nav-wrapper">
+        <a href="{{ path('home') }}" class="brand-logo">YouTeub</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <li><a class="dropdown-trigger" href="#!" data-target="dropdown">{{ app.user.firstname }}<i class="material-icons right">arrow_drop_down</i></a></li>
+            {% else %}
+            <li><a href="{{ path('register') }}">Inscription</a></li>
+            <li><a id="login" href="{{ path('login') }}">Connexion</a></li>
+            {% endif %}
+        </ul>
+    </div>
+
+</nav>
